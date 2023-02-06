@@ -1,6 +1,6 @@
 type Type = 'login' | 'signup';
 
-export default interface FormProps {
+export default interface AuthFormProps {
   type: Type;
-  onSubmit: (username: string, password: string) => void;
+  authRoute: string;
 }
