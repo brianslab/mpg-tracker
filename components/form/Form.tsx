@@ -1,14 +1,20 @@
 import { FormEvent, useState } from 'react';
-import { Button } from '@/components';
-import FormProps from './types';
+import axios from 'axios';
 
-export function Form({ type, onSubmit }: FormProps) {
+import { Button } from '@/components';
+import AuthFormProps from './types';
+
+export function AuthForm({ type, authRoute }: AuthFormProps) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  function handleLoginSubmit(event: FormEvent<HTMLFormElement>) {
+  async function handleLoginSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    onSubmit(username, password);
+    try {
+      await axios.post(authRoute, { username, password });
+    } catch (err: any) {
+      console.error(err.message);
+    }
   }
 
   switch (type) {
